@@ -88,6 +88,19 @@ const DiseaseDetector = () => {
           </div>
         )}
       </div>
+      <div className="bg-purple-300 border-l-4 border-purple-700 text-zinc-900 p-4 rounded-md mt-4 text-sm max-w-xl">
+        <p className="font-semibold">⚠️ Note:</p>
+        <p>
+          This model is trained on scientifically curated images from the <strong>PlantVillage dataset</strong>.
+          It is optimized for clean, close-up, and well-lit leaf images.
+          Real-world photos with background noise, shadows, or distortions may produce wrong predictions.
+          We are working on improving real-world generalization.
+        </p>
+      </div>
+      <div class=" bg-slate-400 w-[100vw] h-[5vh] text-black font-bold flex items-center justify-center text-sm fixed bottom-0">
+  © 2025 Aastik Das. All rights reserved.
+</div>
+
     </div>
   );
 };
