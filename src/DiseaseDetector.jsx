@@ -88,23 +88,23 @@ const DiseaseDetector = () => {
           </div>
         )}
       </div>
-      <div className="bg-purple-300 border-l-4 border-purple-700 text-zinc-900 p-4 rounded-md mt-4 text-sm max-w-xl">
+      <div className="bg-purple-300 border-l-4 border-purple-700 text-zinc-900 p-4 rounded-xl mt-8 max-w-[80vw] ">
         <p className="font-semibold">⚠️ Note:</p>
         <p>
-        1. When you click "Analyze", it may take a few moments for the prediction to appear. 
+        1. When you click <strong> "Analyze"</strong> and result says <strong> "Prediction failed. Please try another image." </strong>, wait a few moments for the prediction to appear. 
         This delay happens because the backend server may need to wake up if it's been idle for some time. 
         Kindly wait patiently while the model loads and processes your image. Thank you for your understanding!
       </p>
 
         <p>
-          2.This model is trained on scientifically curated images from the <strong>PlantVillage dataset</strong>.
+          2.This model is trained on scientifically curated images from the <strong>PlantVillage dataset</strong> ("https://www.kaggle.com/datasets/mohitsingh1804/plantvillage").
           It is optimized for clean, close-up, and well-lit leaf images.
           Real-world photos with background noise, shadows, or distortions may produce wrong predictions.
           We are working on improving real-world generalization.
         </p>
       </div>
       <div class=" bg-slate-400 w-[100vw] h-[5vh] text-black font-bold flex items-center justify-center text-sm fixed bottom-0">
-  © 2025 Aastik Das. All rights reserved.
+  © 2025 Aastik Das
 </div>
 
     </div>
