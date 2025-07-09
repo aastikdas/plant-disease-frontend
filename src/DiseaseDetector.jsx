@@ -91,7 +91,13 @@ const DiseaseDetector = () => {
       <div className="bg-purple-300 border-l-4 border-purple-700 text-zinc-900 p-4 rounded-md mt-4 text-sm max-w-xl">
         <p className="font-semibold">⚠️ Note:</p>
         <p>
-          This model is trained on scientifically curated images from the <strong>PlantVillage dataset</strong>.
+        1. When you click "Analyze", it may take a few moments for the prediction to appear. 
+        This delay happens because the backend server may need to wake up if it's been idle for some time. 
+        Kindly wait patiently while the model loads and processes your image. Thank you for your understanding!
+      </p>
+
+        <p>
+          2.This model is trained on scientifically curated images from the <strong>PlantVillage dataset</strong>.
           It is optimized for clean, close-up, and well-lit leaf images.
           Real-world photos with background noise, shadows, or distortions may produce wrong predictions.
           We are working on improving real-world generalization.
