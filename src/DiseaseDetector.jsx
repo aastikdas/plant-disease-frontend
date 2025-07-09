@@ -103,7 +103,7 @@ const DiseaseDetector = () => {
           We are working on improving real-world generalization.
         </p>
       </div>
-      <div class=" bg-slate-400 w-[100vw] h-[5vh] text-black font-bold flex items-center justify-center text-sm fixed bottom-0">
+      <div className="bg-slate-400 w-[100vw] h-[5vh] text-black font-bold flex items-center justify-center text-sm fixed bottom-0">
   © 2025 Aastik Das
 </div>
 
