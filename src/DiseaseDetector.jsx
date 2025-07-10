@@ -45,7 +45,7 @@ const DiseaseDetector = () => {
   };
 
   return (
-    <div className="bg-cover min-h-screen bg-gray-400 flex flex-col items-center justify-center p-6"
+    <div className="bg-cover min-h-screen bg-gray-400 flex flex-col items-center justify-center p-6 filter "
     style={{ backgroundImage: "url('/bg.jpg')", }}>
       <div className="bg-yellow-100 border rounded-2xl shadow-md p-6 w-full max-w-md space-y-5">
         <h1 className="text-2xl font-bold text-center text-blue-700">Welcome to the Plant Disease Detector</h1>
@@ -72,7 +72,7 @@ const DiseaseDetector = () => {
           disabled={loading || !file}
           className="w-full bg-green-600 hover:cursor-pointer text-white py-2 rounded hover:bg-green-700 transition"
         >
-          {loading ? "Analyzing..." : "Predict Disease"}
+          {loading ? " Please wait, Analyzing..." : "Predict Disease"}
         </button>
 
         {prediction && (
@@ -88,7 +88,7 @@ const DiseaseDetector = () => {
           </div>
         )}
       </div>
-      <div className="bg-purple-300 border-l-4 border-purple-700 text-zinc-900 p-4 rounded-xl mt-8 max-w-[80vw] ">
+      <div className="bg-purple-300 break-words border-l-4 border-purple-700 text-zinc-900 p-4 rounded-xl mt-8 max-w-[80vw] ">
         <p className="font-semibold">⚠️ Note:</p>
         <p>
         1. When you click <strong> "Analyze"</strong> and result says <strong> "Prediction failed. Please try another image." </strong>, wait a few moments for the prediction to appear. 
