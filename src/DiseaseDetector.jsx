@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 const DiseaseDetector = () => {
   const [file, setFile] = useState(null);
@@ -7,16 +8,26 @@ const DiseaseDetector = () => {
   const [prediction, setPrediction] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [dragging, setDragging] = useState(false);
 
-  const handleFileChange = (e) => {
-    const selected = e.target.files[0];
-    if (!selected) return;
+  const processFile = (selectedFile) => {
+  if (!selectedFile) return;
+  setFile(selectedFile);
+  setImagePreview(URL.createObjectURL(selectedFile));
+  setPrediction(null);
+  setError(null);
+};
 
-    setFile(selected);
-    setImagePreview(URL.createObjectURL(selected));
-    setPrediction(null);
-    setError(null);
-  };
+const handleFileChange = (e) => {
+  processFile(e.target.files[0]);
+};
+
+const handleDrop = (e) => {
+  e.preventDefault();
+  setDragging(false);
+  processFile(e.dataTransfer.files[0]);
+};
+
 
   const handleSubmit = async () => {
     if (!file) return;
@@ -44,18 +55,41 @@ const DiseaseDetector = () => {
     }
   };
 
+  
+
+  
+
   return (
     <div className="bg-cover min-h-screen bg-gray-400 flex flex-col items-center justify-center p-6 filter "
     style={{ backgroundImage: "url('/bg.jpg')", }}>
       <div className="bg-yellow-100 border rounded-2xl shadow-md p-6 w-full max-w-md space-y-5">
         <h1 className="text-2xl font-bold text-center text-blue-700">Welcome to the Plant Disease Detector</h1>
-
+<div
+      onDragOver={(e) => {
+        e.preventDefault();
+        setDragging(true);
+      }}
+      onDragLeave={() => setDragging(false)}
+      onDrop={handleDrop}
+      className={`w-full p-6 border-2 ${
+        dragging ? "border-blue-400 bg-blue-50" : "border-dashed border-gray-400 bg-gray-100"
+      } rounded-xl transition duration-200 text-center cursor-pointer`}
+    >
+      <label htmlFor="file-upload" className="block cursor-pointer">
+        <span className="text-gray-600">
+          {dragging ? "Drop the image here" : "Click or drag & drop an image"}
+        </span>
         <input
+          id="file-upload"
           type="file"
           accept="image/*"
           onChange={handleFileChange}
-          className="w-full hover:cursor-pointer border border-black p-2 rounded-xl bg-gray-200"
+          className="hidden"
         />
+      </label>
+    </div>
+        
+
 
         {imagePreview && (
           <div className="flex justify-center">
@@ -91,17 +125,19 @@ const DiseaseDetector = () => {
       <div className="bg-purple-300 break-words border-l-4 border-purple-700 text-zinc-900 p-4 rounded-xl mt-8 max-w-[80vw] ">
         <p className="font-semibold">⚠️ Note:</p>
         <p>
-        1. When you click <strong> "Analyze"</strong> and result says <strong> "Prediction failed. Please try another image." </strong>, wait a few moments for the prediction to appear. 
-        This delay happens because the backend server may need to wake up if it's been idle for some time. 
-        Kindly wait patiently while the model loads and processes your image. Thank you for your understanding!
-      </p>
+  1. When you first enter our website, please wait for a few moments—preferably around <strong>2 minutes</strong>—before clicking <strong>"Predict Disease"</strong>.
+  This short delay is expected because the backend server may need time to wake up if it has been idle.
+  Kindly be patient while the model loads and processes your image. Thank you for your understanding!
+</p>
 
-        <p>
-          2.This model is trained on scientifically curated images from the <strong>PlantVillage dataset</strong> ("https://www.kaggle.com/datasets/mohitsingh1804/plantvillage").
-          It is optimized for clean, close-up, and well-lit leaf images.
-          Real-world photos with background noise, shadows, or distortions may produce wrong predictions.
-          We are working on improving real-world generalization.
-        </p>
+<p>
+  2. This model is trained on scientifically curated images from the <strong>PlantVillage dataset </strong> 
+  (<a href="https://www.kaggle.com/datasets/mohitsingh1804/plantvillage" target="_blank">Click Here</a>).
+  It is optimized for clean, close-up, and well-lit leaf images.
+  Real-world photos with background noise, shadows, or distortions may result in inaccurate predictions.
+  We are actively working on improving the model's generalization to real-world scenarios.
+</p>
+
       </div>
       <div className="bg-slate-400 w-[100vw] h-[5vh] text-black font-bold flex items-center justify-center text-sm fixed bottom-0">
   © 2025 Aastik Das
