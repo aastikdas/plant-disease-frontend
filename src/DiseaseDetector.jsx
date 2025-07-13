@@ -11,22 +11,22 @@ const DiseaseDetector = () => {
   const [dragging, setDragging] = useState(false);
 
   const processFile = (selectedFile) => {
-  if (!selectedFile) return;
-  setFile(selectedFile);
-  setImagePreview(URL.createObjectURL(selectedFile));
-  setPrediction(null);
-  setError(null);
-};
+    if (!selectedFile) return;
+    setFile(selectedFile);
+    setImagePreview(URL.createObjectURL(selectedFile));
+    setPrediction(null);
+    setError(null);
+  };
 
-const handleFileChange = (e) => {
-  processFile(e.target.files[0]);
-};
+  const handleFileChange = (e) => {
+    processFile(e.target.files[0]);
+  };
 
-const handleDrop = (e) => {
-  e.preventDefault();
-  setDragging(false);
-  processFile(e.dataTransfer.files[0]);
-};
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragging(false);
+    processFile(e.dataTransfer.files[0]);
+  };
 
 
   const handleSubmit = async () => {
@@ -40,7 +40,7 @@ const handleDrop = (e) => {
     setError(null);
 
     try {
-        const response = await axios.post(`${import.meta.env.VITE_API_URL}/predict`, formData, {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/predict`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -55,40 +55,39 @@ const handleDrop = (e) => {
     }
   };
 
-  
 
-  
+
+
 
   return (
-    <div className="bg-cover min-h-screen bg-gray-400 flex flex-col items-center justify-center p-6 filter "
-    style={{ backgroundImage: "url('/bg.jpg')", }}>
-      <div className="bg-yellow-100 border rounded-2xl shadow-md p-6 w-full max-w-md space-y-5">
+    <div className="bg-cover min-h-screen bg-gray-400 flex i justify-center filter "
+      style={{ backgroundImage: "url('/bg.jpg')", }}>
+      <div className="bg-yellow-100 border rounded-xl shadow-md p-4 h-fit w-full max-w-md space-y-2 m-4 ">
         <h1 className="text-2xl font-bold text-center text-blue-700">Welcome to the Plant Disease Detector</h1>
-<div
-      onDragOver={(e) => {
-        e.preventDefault();
-        setDragging(true);
-      }}
-      onDragLeave={() => setDragging(false)}
-      onDrop={handleDrop}
-      className={`w-full p-6 border-2 ${
-        dragging ? "border-blue-400 bg-blue-50" : "border-dashed border-gray-400 bg-gray-100"
-      } rounded-xl transition duration-200 text-center cursor-pointer`}
-    >
-      <label htmlFor="file-upload" className="block cursor-pointer">
-        <span className="text-gray-600">
-          {dragging ? "Drop the image here" : "Click or drag & drop an image"}
-        </span>
-        <input
-          id="file-upload"
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="hidden"
-        />
-      </label>
-    </div>
-        
+        <div
+          onDragOver={(e) => {
+            e.preventDefault();
+            setDragging(true);
+          }}
+          onDragLeave={() => setDragging(false)}
+          onDrop={handleDrop}
+          className={`w-full p-6 border-2 ${dragging ? "border-blue-400 bg-blue-50" : "border-dashed border-gray-400 bg-gray-100"
+            } rounded-xl transition duration-200 text-center cursor-pointer`}
+        >
+          <label htmlFor="file-upload" className="block cursor-pointer">
+            <span className="text-gray-600">
+              {dragging ? "Drop the image here" : "Click or drag & drop an image"}
+            </span>
+            <input
+              id="file-upload"
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              className="hidden"
+            />
+          </label>
+        </div>
+
 
 
         {imagePreview && (
@@ -122,26 +121,9 @@ const handleDrop = (e) => {
           </div>
         )}
       </div>
-      <div className="bg-purple-300 break-words border-l-4 border-purple-700 text-zinc-900 p-4 rounded-xl mt-8 max-w-[80vw] ">
-        <p className="font-semibold">⚠️ Note:</p>
-        <p>
-  1. When you first enter our website, please wait for a few moments—preferably around <strong>2 minutes</strong>—before clicking <strong>"Predict Disease"</strong>.
-  This short delay is expected because the backend server may need time to wake up if it has been idle.
-  Kindly be patient while the model loads and processes your image. Thank you for your understanding!
-</p>
-
-<p>
-  2. This model is trained on scientifically curated images from the <strong>PlantVillage dataset </strong> 
-  (<a href="https://www.kaggle.com/datasets/mohitsingh1804/plantvillage" target="_blank">Click Here</a>).
-  It is optimized for clean, close-up, and well-lit leaf images.
-  Real-world photos with background noise, shadows, or distortions may result in inaccurate predictions.
-  We are actively working on improving the model's generalization to real-world scenarios.
-</p>
-
-      </div>
       <div className="bg-slate-400 w-[100vw] h-[5vh] text-black font-bold flex items-center justify-center text-sm fixed bottom-0">
-  © 2025 Aastik Das
-</div>
+        © 2025 Aastik Das | A short delay is expected | Thank you for your visiting!
+      </div>
 
     </div>
   );
